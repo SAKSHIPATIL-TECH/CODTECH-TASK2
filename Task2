@@ -1,0 +1,61 @@
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Function to display a question and get the user's answer
+char askQuestion(const string& question, const string& options, char correctAnswer) {
+    char answer;
+    cout << question << endl;
+    cout << options << endl;
+    cout << "Your answer (a/b/c/d): ";
+    cin >> answer;
+    return tolower(answer); // Convert to lowercase for case-insensitive comparison
+}
+
+// Main function
+int main() {
+    // Initialize score
+    int score = 0;
+    const int TOTAL_QUESTIONS = 3;
+
+    // Questions and options
+    const string question1 = "1. What is the capital of Maharashtra?";
+    const string options1 = "a) Gujarat\nb) Pune\nc) Mumbai\nd) Delhi";
+    const char correctAnswer1 = 'c';
+
+    const string question2 = "2. What is 50 + 30?";
+    const string options2 = "a) 100\nb) 80\nc) 68\nd) 88";
+    const char correctAnswer2 = 'b';
+
+    const string question3 = "3. What color do you get by mixing red and blue?";
+    const string options3 = "a) Green\nb) Purple\nc) Orange\nd) Yellow";
+    const char correctAnswer3 = 'b';
+
+    // Array of questions, options, and correct answers
+    struct Question {
+        string questionText;
+        string optionsText;
+        char correctAnswer;
+    };
+
+    Question questions[TOTAL_QUESTIONS] = {
+        {question1, options1, correctAnswer1},
+        {question2, options2, correctAnswer2},
+        {question3, options3, correctAnswer3}
+    };
+
+    // Loop through each question
+    for (int i = 0; i < TOTAL_QUESTIONS; ++i) {
+        char userAnswer = askQuestion(questions[i].questionText, questions[i].optionsText, questions[i].correctAnswer);
+        if (userAnswer == questions[i].correctAnswer) {
+            cout << "Correct!" << endl;
+            score++;
+        } else {
+            cout << "Incorrect! The correct answer was " << questions[i].correctAnswer << "." << endl;
+        }
+        cout << endl; // New line for better readability
+    }
+
+    // Display final score
